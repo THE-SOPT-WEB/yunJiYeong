@@ -30,3 +30,89 @@ const quizList = [
     answer: "백지연",
   },
 ];
+
+const score = $(".scoreBoard__score");
+const answer = $("ul.answer__list");
+const image = $(".imageBoard > img");
+
+window.onload = () => {
+  gameManager({
+    score: $(".scoreBoard__score"),
+    answer: $("ul.answer__list"),
+    image: $(".imageBoard > img"),
+  });
+};
+
+function gameManager(gameInfo) {
+  initGame(gameInfo);
+  attachEvent(gameInfo);
+}
+
+function initGame({ score, answer, image }) {
+  currentStep = 0;
+  score.innerText = 0;
+  image.src = quizList[currentStep].src;
+}
+
+function progressGame({ score, answer, image }) {
+  currentStep += 1;
+  if (currentStep == quizList.length) {
+    endGame();
+  } else {
+    score.innerText = Number(score.innerText) + 1;
+    image.src = quizList[currentStep].src;
+  }
+}
+
+function attachEvent({ score, answer, image }) {
+  answer.addEventListener("click", (e) => {
+    if (e.target instanceof HTMLElement) {
+      const currentAnswer = e.target.innerText;
+      const realAnswer = quizList[currentStep].answer;
+      checkAnswer(currentAnswer, realAnswer, score, answer, image);
+    }
+  });
+}
+
+function checkAnswer(currentAnswer, realAnswer, score, answer, image) {
+  if (currentAnswer === realAnswer) {
+    progressGame({ score, answer, image });
+  } else {
+    showModal();
+  }
+}
+
+function showModal() {
+  const modal = $(".modal");
+  const modalContent = $(".modal__content");
+  modal.classList.remove("hide");
+  setTimeout(() => {
+    modal.classList.add("hide");
+  }, 1500);
+  modalContent.textContent = "눈을 뜨라고👁👃🏻👁";
+}
+
+function endGame() {
+  const modal = $(".modal");
+  const modalContent = $(".modal__content");
+  modal.classList.remove("hide");
+  modalContent.textContent = "한판 더👍";
+  continueGame();
+}
+
+function continueGame() {
+  const modal = $(".modal");
+  modal.addEventListener("click", (e) => {
+    modal.classList.add("hide");
+    initGame({ score, answer, image });
+  });
+}
+
+function retryGame() {
+  const retyrBtn = $(".buttonList__shuffle");
+  retyrBtn.addEventListener("click", (e) => {
+    initGame({ score, answer, image });
+  });
+}
+
+retryGame();
