@@ -131,6 +131,8 @@ div.imageBoard > img {
   background-color: #f88dd8;
 
   list-style: none;
+
+  cursor: pointer;
 }
 
 .buttonList {
