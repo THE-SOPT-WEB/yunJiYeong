@@ -2,6 +2,7 @@ body {
   margin: 0;
   height: 100vh;
   width: 100vw;
+  position: relative;
 }
 
 header {
@@ -96,6 +97,7 @@ article.burger__card {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 @media (max-width: 700px) {
@@ -132,25 +134,24 @@ img {
 }
 
 section.addToCart {
-  width: 25%;
+  width: 400px;
 }
 .addToCart .addToCart__container {
   background-color:black;
-  height: 230px;
-  width: 85%;
+  min-height: 230px;
+  width: 300px;
   border-radius: 20px;
   margin: 20px;
   display: flex;
   flex-direction: column;
   position: sticky;
-  top: 10px;
-  /* position: fixed;
-  top: 10%;
-  left: 80%; */
+  top: 10px;  
+  flex-grow: 1;
+ 
 }
 
 .addToCart .cart {
-  height: 30%;
+  min-height: 80px;
   border-bottom: solid white 2px;
   margin: 10px;
 }
@@ -160,6 +161,40 @@ section.addToCart {
   font-weight: 900;
   font-size: 20px;
 
+}
+
+.add__menu {
+  display: flex;
+}
+
+.add__menu__text {
+  width: 80%;
+  margin: 10px;
+  color: white;
+}
+
+.add__menu__count {
+  margin: 10px 0;
+  height: 13px;
+  width: 30px;
+  background-color: white;
+  color: #000000;
+  text-align: center;
+  font-weight: 800;
+  
+}
+
+.add__menu__price {
+  margin: 10px;
+  color: white;
+}
+
+.add__menu button {
+  color:black;
+  height: 13px;
+  width: 20px;
+  margin: 10px;
+  cursor: pointer;
 }
 
 .addToCart .amount {
@@ -175,7 +210,7 @@ section.addToCart {
 
 .addToCart .amount__price {
   margin-top: 10px;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -183,7 +218,7 @@ section.addToCart {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20%;
+  height: 40px;
   width: 100%;
 }
 
@@ -230,4 +265,63 @@ section.addToCart {
     height: 20px;
     margin-top: 2px;
   }
+}
+
+.modal.hide {
+  display: none;
+}
+
+.modal__background.hide {
+  display: none;
+}
+
+.modal__background {
+  display: block;
+  position: fixed;
+  top:0; left: 0; bottom: 0; right: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+.modal {
+  display: block;
+  background-color: black;
+  color: white;
+  border-radius: 50px;
+  position: absolute;
+  height: 200px;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0px 0px -200px;
+  text-align: center;
+  
+}
+
+.modal .modal__text {
+  margin-top: 50px;
+  font-size: 25px;
+  font-weight: 700
+}
+
+.modal .modal__btn {
+  margin-top: 50px;
+  height: 50%;
+  width: 100%;
+} 
+
+.modal .modal__btn .yesBtn {
+  margin-right: 20px;
+  height: 25%;
+  width: 35%;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modal .modal__btn .noBtn {
+  margin-left: 20px;
+  height: 25%;
+  width: 35%;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
 }
