@@ -1,25 +1,33 @@
+const addList = {};
 let amountPrice = 0;
+const $ = (selector) => document.querySelector(selector);
+const amountText = document.querySelector(".amount__price");
 
 window.onload = () => {
   chooseMenu();
 };
 
-let priceList = {
-  "리코타 치킨 버거": 6300,
-  "더블 빅맥": 7300,
-  "맥치킨 모짜렐라": 5600,
-  "에그 불고기 버거": 4000,
-  "베이컨 토마토 디럭스": 6300,
-  "더블 치즈버거": 5200,
-  슈슈버거: 5300,
-  슈비버거: 6300,
-  치즈버거: 3100,
-  "더블 치즈버거": 5200,
-  "쿼터파운드 치즈": 6000,
-  "불고기 버거": 3100,
-};
+const priceList = {};
+const editedPrice = document.querySelectorAll(".burger__card__detail__price");
+editedPrice.forEach((price) => {
+  const removedComma = price.innerText.slice(0).replace(/\D/g, "");
+  priceList[price.previousElementSibling.innerText] = Number(removedComma);
+});
 
-const addList = {};
+// let priceList = {
+//   "리코타 치킨 버거": 6300,
+//   "더블 빅맥": 7300,
+//   "맥치킨 모짜렐라": 5600,
+//   "에그 불고기 버거": 4000,
+//   "베이컨 토마토 디럭스": 6300,
+//   "더블 치즈버거": 5200,
+//   슈슈버거: 5300,
+//   슈비버거: 6300,
+//   치즈버거: 3100,
+//   "더블 치즈버거": 5200,
+//   "쿼터파운드 치즈": 6000,
+//   "불고기 버거": 3100,
+// };
 
 function chooseMenu() {
   const burgerCard = document.querySelectorAll(".burger__card");
@@ -41,17 +49,16 @@ function addToCart(e) {
   }
 }
 
-const amountText = document.querySelector(".amount__price");
 function initAdd(e, currentBurger) {
   addList[currentBurger.innerText] = [
     1,
     `₩${priceList[currentBurger.innerText]}`,
   ];
 
-  const burgerCart = document.querySelector(".cart__menu");
+  const burgerCart = $(".cart__menu");
   const menuContainer = document.createElement("div");
   const menuText = document.createElement("div");
-  const countText = document.createElement("div");
+  const countText = document.createElement("input");
   const priceText = document.createElement("div");
   const delBtn = document.createElement("button");
 
@@ -69,12 +76,26 @@ function initAdd(e, currentBurger) {
   delBtn.classList.add("delete__btn");
 
   menuText.textContent = currentBurger.innerText;
-  countText.textContent = addList[currentBurger.innerText][0];
+  countText.value = addList[currentBurger.innerText][0];
   priceText.textContent = addList[currentBurger.innerText][1];
   delBtn.textContent = "X";
+  countText.type = "number";
 
   addAmount(currentBurger);
   clickCancelBtn();
+  checkInput(currentBurger);
+}
+
+function checkInput(currentBurger) {
+  const addCount = document.getElementById(currentBurger.innerText);
+  addCount.addEventListener("click", (e) => {
+    const changedInput = Number(addCount.value);
+    amountPrice +=
+      (changedInput - addList[currentBurger.innerText][0]) *
+      priceList[currentBurger.innerText];
+    amountText.textContent = `₩${amountPrice.toLocaleString()}`;
+    addList[currentBurger.innerText][0] = changedInput;
+  });
 }
 
 function continueAdd(e, currentBurger) {
@@ -83,14 +104,14 @@ function continueAdd(e, currentBurger) {
 }
 
 function continueCount(currentBurger) {
-  addList[currentBurger.innerText][0] += 1;
   const addCount = document.getElementById(currentBurger.innerText);
-  addCount.textContent = addList[currentBurger.innerText][0];
+  addCount.value = Number(addCount.value) + 1;
+  addList[currentBurger.innerText][0] += 1;
 }
 
 function addAmount(currentBurger) {
   amountPrice += priceList[currentBurger.innerText];
-  amountText.textContent = `₩${amountPrice}`;
+  amountText.textContent = `₩${amountPrice.toLocaleString()}`;
 }
 
 function clickCancelBtn() {
@@ -103,21 +124,29 @@ function clickCancelBtn() {
 }
 
 function cancelMenu(e) {
-  const del = e.target.parentNode;
-  del.remove();
+  const del = e.currentTarget.parentNode;
+  if (addList[del.firstChild.innerText]) {
+    amountPrice -=
+      priceList[del.firstChild.innerText] *
+      addList[del.firstChild.innerText][0];
+    amountText.textContent = `₩${amountPrice.toLocaleString()}`;
+    delete addList[del.firstChild.innerText];
+    del.remove();
+  }
+  return;
 }
 
 function allCancel() {
-  const allCancelBtn = document.querySelector(".cancelBtn");
+  const allCancelBtn = $(".cancelBtn");
   allCancelBtn.addEventListener("click", (e) => {
     location.reload();
   });
 }
 
 function successOrder() {
-  const orderBtn = document.querySelector(".orderBtn");
-  const modal = document.querySelector(".modal");
-  const modalBack = document.querySelector(".modal__background");
+  const orderBtn = $(".orderBtn");
+  const modal = $(".modal");
+  const modalBack = $(".modal__background");
 
   orderBtn.addEventListener("click", (e) => {
     modal.classList.remove("hide");
@@ -130,17 +159,16 @@ allCancel();
 successOrder();
 
 function goNextPage() {
-  const yesBtn = document.querySelector(".yesBtn");
+  const yesBtn = $(".yesBtn");
   yesBtn.addEventListener("click", (e) => {
     location.href = "./src/order.html";
   });
 }
 
 function closeModal(modal, modalBack) {
-  const noBtn = document.querySelector(".noBtn");
+  const noBtn = $(".noBtn");
   noBtn.addEventListener("click", (e) => {
     modal.classList.add("hide");
     modalBack.classList.add("hide");
   });
-  console.log(noBtn);
 }
