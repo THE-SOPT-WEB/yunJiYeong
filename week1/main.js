@@ -5,6 +5,8 @@ const amountText = document.querySelector(".amount__price");
 
 window.onload = () => {
   chooseMenu();
+  allCancel();
+  successOrder();
 };
 
 const priceList = {};
@@ -54,7 +56,9 @@ function initAdd(e, currentBurger) {
     1,
     `₩${priceList[currentBurger.innerText]}`,
   ];
-
+  localStorage.clear();
+  localStorage.setItem(1, JSON.stringify(addList));
+  console.log(localStorage);
   const burgerCart = $(".cart__menu");
   const menuContainer = document.createElement("div");
   const menuText = document.createElement("div");
@@ -155,8 +159,6 @@ function successOrder() {
   goNextPage();
   closeModal(modal, modalBack);
 }
-allCancel();
-successOrder();
 
 function goNextPage() {
   const yesBtn = $(".yesBtn");
