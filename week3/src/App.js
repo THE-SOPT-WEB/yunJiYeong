@@ -14,35 +14,35 @@ import TropyJjin from "./img/TropyJjin.png";
 const fighterImgs = [
   {
     img: CookJjin,
-    name: "요리하는 남자 찌니",
+    name: "👨🏻‍🍳요리하는 남자👨🏻‍🍳 찌니🤍",
   },
   {
     img: CoolJjin,
-    name: "쿨한 남자 찌니",
+    name: "🐂황소같은 남자🐂 찌니🤍",
   },
   {
     img: CryJjin,
-    name: "눈물 흘리는 남자 찌니",
+    name: "💧눈물 흘리는 남자💧 찌니🤍",
   },
   {
     img: HyumJjin,
-    name: "먼혐지니",
+    name: "먼혐지니👁👁",
   },
   {
     img: MacJjin,
-    name: "맥북 가진남자 찌니",
+    name: "💻맥북 가진남자💻 찌니",
   },
   {
     img: ShyJjin,
-    name: "부끄러운 남자 찌니",
+    name: "👀부끄러운 남자👀 찌니🤍",
   },
   {
     img: TropyJjin,
-    name: "상받는 남자 찌니",
+    name: "🏆상받는 남자🏆 찌니🤍",
   },
   {
     img: FuckJjin,
-    name: "뻐킹 멋진남자 찌니",
+    name: "🎸뻐킹 멋진남자🎸 찌니🤍",
   },
 ];
 
@@ -67,7 +67,6 @@ function App() {
   return (
     <>
       <h1 className="pageTitle">Who is the Best Jjinny?</h1>
-      <h2 className="roundTitle">{round}th Round❗️</h2>
       <FightGame
         fighter={fighter}
         setFighter={setFighter}

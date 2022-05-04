@@ -1,6 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+
+.App {
+font-family: 'Nanum Gothic', sans-serif;
+background-color: black;
+}
+
+#root {
+  height: 100vh;
+  background-color: black;
+}
+
 h1, h2 {
   text-align: center;
+  margin: 0;
+  padding-top: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
+
+.roundText {
+  font-size: 60px;
+  color: gainsboro;
+}
+
+.otherText {
+  padding-top: 30px;
+} 
 
 .pageTitle {
   text-align: center;
@@ -12,9 +38,17 @@ h1, h2 {
   margin: 40px;
 }
 
-.imgPair {
+.imgPair1, .imgPair2 {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.imgName {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: 'Nanum Gothic', sans-serif;
+  /* text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; */
+  color: white;
 }
