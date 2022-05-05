@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import vsImg from "./img/fight.png";
+import ShowImage from "./ShowImage.js";
 
 const FightGame = ({
   fighter,
@@ -27,7 +29,7 @@ const FightGame = ({
     return (
       <div className="imgContainer">
         <img className="imgContents" src={fighter[0].img} alt="lastImg" />
-        <span>{fighter[0].name}</span>
+        {/* <span>{fighter[0].name}</span> */}
       </div>
     );
   }
@@ -39,30 +41,22 @@ const FightGame = ({
         <span className="otherText">th Round❗️</span>
       </h2>
       <div className="imgContainer">
-        {fighter.length > 0 && (
-          <div className="imgPair1">
-            <img
-              className="imgContents"
-              name={displayImg[0].name}
-              src={displayImg[0].img}
-              alt="img"
-              onClick={eventHandle}
-            />
-            <div className="imgName">{fighter[0].name}</div>
-          </div>
-        )}
-        {fighter.length > 0 && (
-          <div className="imgPair2">
-            <img
-              className="imgContents"
-              name={displayImg[1].name}
-              src={displayImg[1].img}
-              alt="img"
-              onClick={eventHandle}
-            />
-            <div className="imgName">{fighter[1].name}</div>
-          </div>
-        )}
+        <ShowImage
+          fighter={fighter}
+          eventHandle={eventHandle}
+          displayImg={displayImg}
+          order={0}
+        />
+        <div className="vsContainer">
+          <img className="vsImg" src={vsImg} alt="vsImg"></img>
+        </div>
+
+        <ShowImage
+          fighter={fighter}
+          eventHandle={eventHandle}
+          displayImg={displayImg}
+          order={1}
+        />
       </div>
     </>
   );

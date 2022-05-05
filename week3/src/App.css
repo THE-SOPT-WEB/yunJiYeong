@@ -5,8 +5,12 @@ font-family: 'Nanum Gothic', sans-serif;
 background-color: black;
 }
 
+.body {
+  background-color: black;
+}
+
 #root {
-  height: 100vh;
+  height: 1000px;
   background-color: black;
 }
 
@@ -19,13 +23,20 @@ h1, h2 {
   justify-content: center;
 }
 
-.roundText {
+h1 {
+  font-size: 80px;
+}
+
+h2 {
   font-size: 60px;
+}
+.roundText {
+  font-size: 80px;
   color: gainsboro;
 }
 
 .otherText {
-  padding-top: 30px;
+  padding-top: 15px;
 } 
 
 .pageTitle {
@@ -33,9 +44,11 @@ h1, h2 {
 }
 
 .imgContainer {
+  background-color: black;
   display: flex;
   justify-content: center;
   margin: 40px;
+  margin-top: 0;
 }
 
 .imgPair1, .imgPair2 {
@@ -43,6 +56,15 @@ h1, h2 {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background-color: black;
+  margin: 10px;
+}
+
+.imgContents {
+  overflow: hidden;
+  border-radius: 250px;
+  background-color: black;
+  margin: 0 5px;
 }
 
 .imgName {
@@ -51,4 +73,16 @@ h1, h2 {
   font-family: 'Nanum Gothic', sans-serif;
   /* text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; */
   color: white;
+}
+
+
+.vsContainer {
+  display: flex;
+  align-items: center;
+}
+.vsImg {
+  transform: rotate(315deg);
+  height: 200px;
+  width: 200px;
+  
 }
